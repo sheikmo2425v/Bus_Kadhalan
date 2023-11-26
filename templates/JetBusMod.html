@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISM - Bank</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+
+    <div class="container-fluid bg-dark">
+        <div class=" d-flex justify-content-between align-items-center">
+            <div class="">
+                <button class="btn btn-light" id="toggleOffcanvas">
+                    <i class="bi bi-list"></i> Menu
+                </button>
+            </div>
+            <div class=" text-center title">
+                <h1>Bus Kadhalan</h1>
+            </div>
+            <div class="">
+                <div class="btn-group center-align">
+                    <a class="btn btn-light center-align" href="index.html">About</a>
+                    <a class="btn btn-light center-align" href="index.html">Join</a>
+                    <a href="page2.html" class=" btn btn-light center-align"><img
+                            src="{{ url_for('static', filename='images/youtube.png') }}" width="25" alt=""></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="offcanvas offcanvas-start custom-width bg-dark w-25" tabindex="-1" id="offcanvas"
+        data-bs-keyboard="false" data-bs-backdrop="false">
+        <div class="offcanvas-header">
+
+            <img src="{{ url_for('static', filename='images/bk logo.png') }}" alt="logo" width="60">
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+
+        <div class="offcanvas-body ">
+            <ul class="nav nav-pills flex-column mb-0">
+                <li class="nav-item">
+                    <a class="nav-link " href="/">
+                        <i class="bi bi-house"></i> Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="JetBusMod">
+                        <i class="bi bi-file-text"></i> Jet Bus Mod
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <!-- Add this within the body tag -->
+    <div class="containers">
+        <div class="row p-4">
+            <div class="col-12 bor ">
+
+                <h1>banner....</h1>
+
+
+            </div>
+            <div class="col-12  bor " >
+
+                
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h2>Jet Bus Mods</h2>
+                        <div class="input-group w-25" >
+                            <input type="text" class="form-control" id="searchInput" placeholder="Search by name"
+                                list="modSuggestions">
+                            <datalist id="modSuggestions">
+                                <!-- Use the suggestions from your data -->
+                                {% for record in data %}
+                                <option value="{{ record[1] }}">
+                                    {% endfor %}
+                            </datalist>
+                            <button class="btn btn-outline-dark" id="searchBtn">Search</button>
+                        </div>
+                    </div>
+                    <div class="row" id="modContainer" style="overflow: scroll;"> 
+                        {% for record in data %}
+                            <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <img src="{{ url_for('static', filename='images/Jetbusmod/' ~ record[1] | replace(' ', '') ~ '.jpg') }}"
+                                            alt='{{ record[1] }}' class="img-fluid" srcset="">
+                                        <h5 class="card-title">{{ record[1] }}</h5>
+                                        <p class="card-text">{{ record[2] }}</p>
+                                        <button class="btn btn-outline-dark card-details-btn"
+                                            data-card-id="{{ record[0] }}">Download</button>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Include jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <!-- Include Bootstrap JS library -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-rfPyN5qYcWvTzOXDIcNvJEP81q8RFAjO8SfKG+Rv6YfA9djsd9lDdlyOGRY9G5F5"
+        crossorigin="anonymous"></script>
+
+    <script src="{{ url_for('static', filename='js/main.js')}}">
+
+    </script>
+
+</body>
+
+</html>

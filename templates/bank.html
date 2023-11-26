@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color: black;color: rgb(228, 228, 228);">
+    <div id="li">
+    
+        <div class="container"  id="bi">
+        <div class="row">
+          <button id="Balance">Balance</button>
+          <button id="Withdraw">Withdraw</button>
+          <button id="Deposite">Deposite</button>
+          <button id="save">save</button>
+          <button id="main">Exit</button>
+        
+        </div>
+        <div id="bl">
+          <p id="rn"></p>
+          <p id="bal"style="display: none;">{{bal}}</p>
+          <p id="ph" style="display: none;">{{ph}}</p>
+        </div>
+        <div id="d" class = "container" style="display:none ;">
+          <p>Enter the Deposite amount:</p>
+          <input type="text" id="dv"><input type="submit" id="ds">
+        
+        </div>
+        <div id="w" class = "container" style="display:none ;">
+          <p>Enter the withdraw amount:</p>
+          <input type="text" id="wv"><input type="submit" id="ws"></div>
+      </div>
+    </div>
+</body>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+<script  src="https://code.jquery.com/jquery-3.6.1.js"></script>
+
+<script>
+  $(document).ready(function(){
+
+    
+                var balance=document.querySelector("#Balance");
+                var deposite=document.querySelector("#Deposite");
+                var withdraw=document.querySelector("#Withdraw");
+                var main=document.querySelector("#main");
+                
+                var bal=parseInt(document.querySelector("#bal").innerHTML);
+                
+                 console.log(bal)
+                  var bl =document.querySelector("#bl")
+                  var d =document.querySelector("#d")
+                  var w =document.querySelector("#w")
+                
+                 var bal=[bal]
+                  
+                  var dps =document.querySelector("#ds")
+                  var wts =document.querySelector("#ws")
+                
+                  bl.style.display="initial";
+                   
+                    console.log(bl)
+                    balance.addEventListener("click",function() {
+                   
+                      
+                      console.log(bal[0])
+                      var bals=  `<p>balance:${bal[0]}</p>`
+                               bl.innerHTML=  bals
+                    });
+                    deposite.addEventListener("click",function(){
+                    
+                     d.style.display="initial";
+                     w.style.display="none";
+                     dps.addEventListener("click",function(){
+                        var dpv =parseInt(document.querySelector("#dv").value);
+                        console.log(dpv)
+                        bal[0]=dpv+bal[0]
+                        console.log(bal[0])
+                        var bals=  `<p>balance:${bal[0]}</p>`
+                               bl.innerHTML= bals
+                       document.querySelector("#dv").value="  ";
+                    
+                     })
+                     
+                     });
+                     withdraw.addEventListener("click",function(){
+                        
+                        w.style.display="initial";
+                        d.style.display="none";
+                        wts.addEventListener("click",function(){
+
+                           var wtv =parseInt(document.querySelector("#wv").value);
+                        
+                         
+                             if (bal[0]>wtv){
+                               bal[0]=bal[0]-wtv
+                               console.log(bal[0])
+                            var bals=  `<p>balance:${bal[0]}</p>`
+                               bl.innerHTML=  bals
+                               document.querySelector("#wv").value="   ";                      
+                          
+                    
+                    
+               
+
+            
+        
+                           }
+                            else{
+                                console.log("insufficient balan")
+                                
+                        }
+                     
+                  });
+                        });
+                        var ph=document.querySelector("#ph").innerHTML;
+                        main.addEventListener("click",function(){
+                           $("#bi").fadeOut("slow"); 
+                          
+                           });
+                           $("#save").on("click",function(){
+                            save=bal[0]
+                            console.log(bal)
+                           $.post({
+                           url:"out3",
+                           data:{save:save,ph:ph},
+                           success:function(e){
+                          $("#rn").text(e);
+                                          
+                         
+                          
+                    
+                    
+                }
+
+            })
+        })
+                          
+                        })
+
+             
+            
+         
+</script>
+
+</html>

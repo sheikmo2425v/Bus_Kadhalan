@@ -1,0 +1,35 @@
+$(document).ready(function(){
+        $("#y").on("click",function(){
+            $.post({
+
+                url:"out",
+                data:{a1:$("#email").val(),a2:$("#psw").val(),a3:$("#repsw"),a4:("#ph")},
+                success:function(e){
+                    $("p").text(e);
+                    $("#email").val("")
+                    $("#psw").val("")
+                    $("#repsw").val("")
+                    $("#ph").val("")
+                    
+                    
+                }
+
+            })
+        })
+    })
+
+
+    <div id="sbody" class="container-fluid  text-white text-center bg-dark " style= "margin: 5% auto 15% auto; border: 1px solid #888; width: 30%;">
+    <h1>Sign Up</h1>
+    <p>Please fill in this form to create an account.</p>
+    <hr>
+       <label for="email"><b>Email</b></label><br>
+       <input type="text" placeholder="Enter Email" name="email" required id="email"><br>
+       <label for="psw"><b>Password</b></label><br>
+       <input type="password" placeholder="Enter Password" name="psw" required id="psw"><br>
+       <label for="psw"><b>retype Password</b></label><br>
+       <input type="password" placeholder="Enter retype Password" name="repsw" required id="repsw"><br>
+       <label for="psw"><b>Password</b></label><br>
+       <input type="text" placeholder="Enter phone number" name="ph" required id="ph"><br>
+     <input type="submit"  id="y"> 
+     </div>
