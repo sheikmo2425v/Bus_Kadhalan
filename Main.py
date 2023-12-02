@@ -5,12 +5,16 @@ import os
 app = Flask(__name__)
 
 
+
+db_path = os.path.join(os.path.dirname(__file__), "ism_bank.db")
+con = ism.connect(db_path)
+
 @app.route('/')
 def w2():
     return render_template("index.html")
 @app.route('/JetBusMod')
 def JetBusMod():
-    con = ism.connect("ism_bank.db")
+   
     # name='bus3 '
     # description='super fast'
     con.execute("CREATE TABLE IF NOT EXISTS jet_bus (Id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(50) NOT NULL UNIQUE, description TEXT)")
@@ -139,6 +143,5 @@ def out3():
     return ("saved successfully")
 
 # l
-#  if __name__ == "__main__":
-#     port = int(os.environ.get('PORT', 5000))
-#     app.run(host='0.0.0.0',port=5000)
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
